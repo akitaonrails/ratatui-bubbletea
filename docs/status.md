@@ -18,17 +18,19 @@ This file records the current state so future sessions can resume after context 
 
 ## Release status
 
-`v0.1.0` has been released.
+Latest planned release: `v0.2.0`.
+
+Previously released: `v0.1.0`.
 
 Published crates:
 
-- `ratatui-bubbletea-theme = "0.1.0"`
-- `ratatui-bubbletea-components = "0.1.0"`
-- `ratatui-tea = "0.1.0"`
+- `ratatui-bubbletea-theme = "0.2.0"`
+- `ratatui-bubbletea-components = "0.2.0"`
+- `ratatui-tea = "0.2.0"`
 
 GitHub release:
 
-- <https://github.com/akitaonrails/ratatui-bubbletea/releases/tag/v0.1.0>
+- <https://github.com/akitaonrails/ratatui-bubbletea/releases/tag/v0.2.0>
 
 The release workflow is intentionally rerunnable: already-published crates are skipped based on crates.io's `already exists` response.
 
@@ -50,7 +52,7 @@ Implemented ports:
 - components: `bubbletea-help`, `bubbletea-list-simple`, `bubbletea-result`, `bubbletea-progress-static`, `bubbletea-spinner`, `bubbletea-table`, `bubbletea-textinput`, `bubbletea-pager`, `bubbletea-tabs`, `bubbletea-showcase`.
 - tea: `bubbletea-simple`, `bubbletea-sequence`.
 
-These examples use ratatui rendering. Small component examples target `TestBackend` for CI-friendly compilation. `bubbletea-showcase` and the `ratatui-tea` examples are interactive crossterm apps that quit on `q`/Esc.
+These examples use ratatui rendering. Small component examples may target `TestBackend` for CI-friendly compilation. `bubbletea-spinner`, `bubbletea-showcase`, and the `ratatui-tea` examples are interactive crossterm apps that quit on `q`/Esc.
 
 ## Implemented components
 
@@ -67,7 +69,7 @@ These examples use ratatui rendering. Small component examples target `TestBacke
 
 - `KeyBinding`, `KeyMap`,
 - `Help`, `HelpMode`,
-- `Spinner`, `SpinnerFrames`, `SpinnerState`,
+- `Spinner`, `SpinnerFrames`, `SpinnerState`, including built-in frame sets such as `DOTS`, `DOTS_THICK`, `LINE`, `JUMP`, `PULSE`, `POINTS`, `METER`, `HAMBURGER`, `ELLIPSIS`, `GLOBE`, `MOON`, `MONKEY`, `ARC`, `ASTERISK`, `CLOCK`, `DOT_ORBIT`, `BOX_TRACE`, `DOTS_CIRCLE`, `SAND`, `STAR`, `CIRCLE`, and `SQUARE_CORNERS`,
 - `Progress`, `ProgressSymbols`,
 - `ListItem`, `ListState`, `SelectList`,
 - `ThemedTable`,

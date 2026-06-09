@@ -18,7 +18,7 @@ categories = ["command-line-interface"]
 
 [workspace.dependencies]
 ratatui = { version = "0.30.1", default-features = false }
-ratatui-bubbletea-theme = { version = "0.1.0", path = "crates/ratatui-bubbletea-theme" }
+ratatui-bubbletea-theme = { version = "0.2.0", path = "crates/ratatui-bubbletea-theme" }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"

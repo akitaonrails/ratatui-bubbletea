@@ -82,7 +82,11 @@ cargo run -p ratatui-bubbletea-components --example bubbletea-showcase
 
 ## Release notes
 
-- `v0.1.0` has been published for:
+- `v0.2.0` is the current planned/latest release line for:
+  - `ratatui-bubbletea-theme`
+  - `ratatui-bubbletea-components`
+  - `ratatui-tea`
+- `v0.1.0` was published for:
   - `ratatui-bubbletea-theme`
   - `ratatui-bubbletea-components`
   - `ratatui-tea`

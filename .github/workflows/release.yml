@@ -45,16 +45,18 @@ jobs:
       - name: Dry-run publish all crates
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run == 'true' }}
         run: |
+          theme_version=$(cargo pkgid -p ratatui-bubbletea-theme | sed 's/.*@//')
+
           cargo publish --dry-run -p ratatui-bubbletea-theme
 
           # On the first release, dependent crates cannot be dry-run published
           # until ratatui-bubbletea-theme exists in the crates.io index. The
           # real publish path below publishes crates in dependency order.
-          if cargo search ratatui-bubbletea-theme --limit 1 | grep -q '^ratatui-bubbletea-theme = "0.1.0"'; then
+          if cargo search ratatui-bubbletea-theme --limit 1 | grep -q "^ratatui-bubbletea-theme = \"$theme_version\""; then
             cargo publish --dry-run -p ratatui-bubbletea-components
             cargo publish --dry-run -p ratatui-tea
           else
-            echo "::notice::Skipping dependent crate dry-runs because ratatui-bubbletea-theme 0.1.0 is not indexed on crates.io yet."
+            echo "::notice::Skipping dependent crate dry-runs because ratatui-bubbletea-theme $theme_version is not indexed on crates.io yet."
           fi
 
       - name: Publish ratatui-bubbletea-theme
@@ -64,6 +66,8 @@ jobs:
         run: |
           publish_crate() {
             local crate="$1"
+            local version
+            version=$(cargo pkgid -p "$crate" | sed 's/.*@//')
             set +e
             output=$(cargo publish -p "$crate" 2>&1)
             status=$?
@@ -71,7 +75,7 @@ jobs:
             echo "$output"
             if [ "$status" -ne 0 ]; then
               if echo "$output" | grep -q "already exists on crates.io index"; then
-                echo "$crate 0.1.0 is already published; skipping."
+                echo "$crate $version is already published; skipping."
               else
                 exit "$status"
               fi
@@ -83,6 +87,8 @@ jobs:
       - name: Wait for theme crate indexing
         if: ${{ github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'false') }}
         run: |
+          theme_version=$(cargo pkgid -p ratatui-bubbletea-theme | sed 's/.*@//')
+
           for attempt in {1..40}; do
             if cargo package --no-verify -p ratatui-bubbletea-components >/tmp/ratatui-bubbletea-package.log 2>&1; then
               exit 0
@@ -91,7 +97,7 @@ jobs:
             echo "Waiting for crates.io index update ($attempt/40)..."
             sleep 15
           done
-          echo "ratatui-bubbletea-theme 0.1.0 was not visible in the crates.io index in time" >&2
+          echo "ratatui-bubbletea-theme $theme_version was not visible in the crates.io index in time" >&2
           exit 1
 
       - name: Publish ratatui-bubbletea-components
@@ -101,6 +107,8 @@ jobs:
         run: |
           publish_crate() {
             local crate="$1"
+            local version
+            version=$(cargo pkgid -p "$crate" | sed 's/.*@//')
             set +e
             output=$(cargo publish -p "$crate" 2>&1)
             status=$?
@@ -108,7 +116,7 @@ jobs:
             echo "$output"
             if [ "$status" -ne 0 ]; then
               if echo "$output" | grep -q "already exists on crates.io index"; then
-                echo "$crate 0.1.0 is already published; skipping."
+                echo "$crate $version is already published; skipping."
               else
                 exit "$status"
               fi
@@ -124,6 +132,8 @@ jobs:
         run: |
           publish_crate() {
             local crate="$1"
+            local version
+            version=$(cargo pkgid -p "$crate" | sed 's/.*@//')
             set +e
             output=$(cargo publish -p "$crate" 2>&1)
             status=$?
@@ -131,7 +141,7 @@ jobs:
             echo "$output"
             if [ "$status" -ne 0 ]; then
               if echo "$output" | grep -q "already exists on crates.io index"; then
-                echo "$crate 0.1.0 is already published; skipping."
+                echo "$crate $version is already published; skipping."
               else
                 exit "$status"
               fi
