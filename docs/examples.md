@@ -2,7 +2,7 @@
 
 This repository includes Rust examples that recreate the parts of Charm's Bubble Tea example catalog that map to the current API surface.
 
-The examples intentionally render through ratatui widgets. Small component examples use `TestBackend` so they are cheap to compile and run in CI; they are source-level showcases rather than full interactive terminal demos. `bubbletea-showcase` and the `ratatui-tea` examples use ratatui's crossterm backend and stay open until you quit.
+The examples intentionally render through ratatui widgets. Small component examples may use `TestBackend` so they are cheap to compile and run in CI; they are source-level showcases rather than full interactive terminal demos. `bubbletea-spinner`, `bubbletea-showcase`, and the `ratatui-tea` examples use ratatui's crossterm backend and stay open until you quit.
 
 ## All-components TUI showcase
 
@@ -32,7 +32,7 @@ Controls:
 | `examples/list-simple` | `bubbletea-list-simple` | `ratatui-bubbletea-components` | Simple selected list with descriptions. |
 | `examples/result` | `bubbletea-result` | `ratatui-bubbletea-components` | Choice list plus selected result panel. |
 | `examples/progress-static` | `bubbletea-progress-static` | `ratatui-bubbletea-components` | Multiple static progress bars. |
-| `examples/spinner` | `bubbletea-spinner` | `ratatui-bubbletea-components` | Dots spinner plus ASCII fallback. |
+| `examples/spinner` | `bubbletea-spinner` | `ratatui-bubbletea-components` | Interactive spinner gallery with all built-in frame sets. |
 | `examples/table` | `bubbletea-table` | `ratatui-bubbletea-components` | Themed table with header and selected row. |
 | `examples/textinput` | `bubbletea-textinput` | `ratatui-bubbletea-components` | Focused single-line input and cursor rendering. |
 | `examples/pager` | `bubbletea-pager` | `ratatui-bubbletea-components` | Scrollable viewport with position indicator. |
@@ -58,7 +58,7 @@ cargo run -p ratatui-tea --example bubbletea-simple
 cargo run -p ratatui-tea --example bubbletea-sequence
 ```
 
-`bubbletea-showcase`, `bubbletea-simple`, and `bubbletea-sequence` enter the alternate screen and wait for keyboard input. Press `q` or Esc to quit.
+`bubbletea-spinner`, `bubbletea-showcase`, `bubbletea-simple`, and `bubbletea-sequence` enter the alternate screen and wait for keyboard input. Press `q` or Esc to quit.
 
 ## Not ported yet
 
